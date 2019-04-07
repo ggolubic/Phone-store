@@ -1,10 +1,50 @@
 import * as React from "react";
 import "./App.css";
 
-class App extends React.Component {
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { fetchData } from "./store/actions";
+
+import Header from "./components/Header/Header";
+import Home from "./components/Home/Home";
+import Modal from "./components/Modal/Modal";
+
+interface DispatchProps {
+  handleFetchData: () => void;
+}
+
+interface StateProps {
+  modal: boolean;
+}
+
+type Props = StateProps & DispatchProps;
+class App extends React.Component<Props, {}> {
+  componentDidMount() {
+    this.props.handleFetchData();
+  }
+
   public render() {
-    return <div />;
+    return (
+      <div className="app">
+        <Header />
+        <Home />
+        {this.props.modal && <Modal />}
+      </div>
+    );
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    handleFetchData: (): any => dispatch<any>(fetchData())
+  };
+};
+
+const mapStateToProps = (state: any) => ({
+  modal: state.modalOpen
+});
+
+export default connect<StateProps, DispatchProps, {}>(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

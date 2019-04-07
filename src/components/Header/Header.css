@@ -1,0 +1,29 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 10px 20px;
+  background: #fff;
+  border-bottom: 2px solid rgb(223, 219, 219);
+}
+.logo {
+  width: 45px;
+}
+.header-cart-btn {
+  background: transparent;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  color: #000;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+.header-cart-btn a {
+  text-decoration: none;
+}
+.header-cart-btn:hover {
+  transition-duration: 0.5s;
+  color: #f0577d;
+}

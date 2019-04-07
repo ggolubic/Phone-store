@@ -1,0 +1,35 @@
+.product-list {
+  width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 5%;
+  margin: 0 auto;
+  justify-content: space-between;
+  transition: all 1s;
+}
+.products {
+  font-family: "Lato";
+  text-align: center;
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 1250px) {
+  .product-list {
+    max-width: 800px;
+    grid-template-columns: 30% 30% 30%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .product-list {
+    max-width: 500px;
+    grid-template-columns: 45% 45%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .product-list {
+    display: block;
+    margin: 0 auto;
+  }
+}

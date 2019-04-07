@@ -1,0 +1,16 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 40% 50%;
+  grid-column-gap: 10%;
+}
+.details-title {
+  text-align: center;
+}
+.details-info {
+  font-family: "Roboto";
+  text-align: justify;
+}

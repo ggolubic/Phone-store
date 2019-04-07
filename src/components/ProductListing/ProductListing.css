@@ -1,0 +1,76 @@
+.listing {
+  max-width: 350px;
+  border-color: transparent;
+  transition: all 0.5s linear;
+  text-align: center;
+  background: #fff;
+  font-family: "Lato";
+}
+
+.listing-img {
+  height: 200px;
+  margin: 0 auto;
+  margin-top: 20px;
+  transition: all 0.5s;
+}
+.listing-info {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-top: transparent;
+  transition: all 0.5s linear;
+  justify-content: space-between;
+}
+.listing-price,
+.listing-title {
+  margin: 10px 8px 0px 8px;
+  padding: 10px 0px 10px 0px;
+}
+.listing:hover {
+  border: 0.04rem solid rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.2);
+}
+.listing:hover .listing-info {
+  background: rgba(247, 247, 247);
+  border-top: 1px solid #888;
+}
+.listing-title {
+  font-size: 16px;
+}
+.img-container {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+.img-container:hover .listing-img {
+  transform: scale(1.2);
+  transition: all 0.5s;
+}
+
+.cart-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  background: rgb(83, 160, 233);
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  border-radius: 0.5rem 0 0 0;
+  transform: translate(100%, 100%);
+  transition: all 0.5s linear;
+}
+.img-container:hover .cart-btn {
+  transform: translate(0%, 0%);
+  transition: all 0.5s linear;
+}
+.cart-btn:hover {
+  cursor: pointer;
+}
+.in-cart {
+  margin: 2px;
+}
+.fa-shopping-cart:hover {
+  color: #000;
+  transition-duration: 0.5s;
+}
