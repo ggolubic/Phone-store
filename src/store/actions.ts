@@ -6,6 +6,7 @@ export const CLOSE_MODAL = "CLOSE_MODAL";
 export const INCREASE_CART = "INCREASE_CART";
 export const DECREASE_CART = "DECREASE_CART";
 export const REMOVE_CART = "REMOVE_CART";
+export const CLEAR_CART = "CLEAR CART";
 import { data, phones } from "../data";
 
 type FetchData = { type: typeof FETCH_DATA; payload: data[] };
@@ -16,6 +17,7 @@ type CloseModal = { type: typeof CLOSE_MODAL };
 type IncreaseCart = { type: typeof INCREASE_CART; payload: number };
 type DecreaseCart = { type: typeof DECREASE_CART; payload: number };
 type RemoveCart = { type: typeof REMOVE_CART; payload: number };
+type ClearCart = { type: typeof CLEAR_CART };
 
 export const fetchData = (): FetchData => {
   console.log("FETCH DATA");
@@ -74,6 +76,12 @@ export const removeCart = (id: number): RemoveCart => {
     payload: id
   };
 };
+export const clearCart = (): ClearCart => {
+  console.log("CLEAR CART");
+  return {
+    type: CLEAR_CART
+  };
+};
 
 export type Actions =
   | FetchData
@@ -83,4 +91,5 @@ export type Actions =
   | CloseModal
   | IncreaseCart
   | DecreaseCart
-  | RemoveCart;
+  | RemoveCart
+  | ClearCart;

@@ -7,7 +7,8 @@ import {
   CLOSE_MODAL,
   INCREASE_CART,
   DECREASE_CART,
-  REMOVE_CART
+  REMOVE_CART,
+  CLEAR_CART
 } from "../actions";
 import { data, productDetails } from "../../data";
 
@@ -150,6 +151,12 @@ export default function reducer(state: state = initialState, action: Actions) {
       }
       return { ...state };
     }
+    case CLEAR_CART:
+      let tempCart = [];
+      return {
+        ...state,
+        cart: tempCart
+      };
     default:
       return {
         ...state
@@ -174,7 +181,7 @@ function getIndexOfItem(state: data[], id: number) {
   return -1;
 }
 
-//selector
+//selectors
 
 export function getCartTax(subtotal: number) {
   return subtotal * 0.25;
