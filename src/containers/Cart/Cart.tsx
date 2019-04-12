@@ -5,19 +5,27 @@ import { Link } from "react-router-dom";
 import { Dispatch } from "redux";
 
 import { emptyCart } from "../../utility/images";
+import PaypalBtn from "../../components/PaypalBtn/Paypalbtn";
 import "./Cart.css";
 import {
   addToDetails,
   increaseCart,
   decreaseCart,
-  removeCart
+  removeCart,
+  clearCart
 } from "src/store/actions";
+import { History } from "history";
+
+interface RouterProps {
+  history: History;
+}
 
 interface DispatchProps {
   handleDetails: (item: data) => void;
   increment: (id: number) => void;
   decrement: (id: number) => void;
   remove: (id: number) => void;
+  clear: () => void;
 }
 
 interface StateProps {
@@ -27,7 +35,7 @@ interface StateProps {
   total: number;
 }
 
-type Props = DispatchProps & StateProps;
+type Props = DispatchProps & StateProps & RouterProps;
 
 class Cart extends React.Component<Props, {}> {
   render() {
@@ -37,6 +45,7 @@ class Cart extends React.Component<Props, {}> {
       increment,
       decrement,
       remove,
+      clear,
       subtotal,
       tax,
       total
@@ -89,7 +98,12 @@ class Cart extends React.Component<Props, {}> {
                   }
                   onClick={() => decrement(item.id)}
                 />
-                <input type="text" className="cart-input" value={item.count} />
+                <input
+                  type="text"
+                  className="cart-input"
+                  value={item.count}
+                  readOnly={true}
+                />
                 <i
                   className="fas fa-plus cart-add change-btn"
                   onClick={() => increment(item.id)}
@@ -104,6 +118,11 @@ class Cart extends React.Component<Props, {}> {
           <h3>Subtotal: ${subtotal}</h3>
           <h3>Tax (25%): ${tax}</h3>
           <h3>Total: ${total}</h3>
+          <PaypalBtn
+            total={total}
+            history={this.props.history}
+            clearCart={clear}
+          />
         </div>
       </div>
     );
@@ -121,7 +140,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   handleDetails: (product: data) => dispatch(addToDetails(product)),
   increment: (id: number) => dispatch(increaseCart(id)),
   decrement: (id: number) => dispatch(decreaseCart(id)),
-  remove: (id: number) => dispatch(removeCart(id))
+  remove: (id: number) => dispatch(removeCart(id)),
+  clear: () => dispatch(clearCart())
 });
 export default connect(
   mapStateToProps,
