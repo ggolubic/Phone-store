@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { addToCart, openModal } from "../../store/actions";
-import { data } from "../../data";
+import { data } from "../../store/reducers/productReducer";
 import { Dispatch } from "redux";
 import { Link } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { data } from "../../data";
+import { data } from "../../store/reducers/productReducer";
 import { closeModal } from "src/store/actions";
 import { Dispatch } from "redux";
 import { Link } from "react-router-dom";

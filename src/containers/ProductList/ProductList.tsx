@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { addToCart, addToDetails, openModal } from "../../store/actions";
-import { data } from "../../data";
+import { data } from "../../store/reducers/productReducer";
 
 import ProductListing from "../../components/ProductListing/ProductListing";
 import "./ProductList.css";

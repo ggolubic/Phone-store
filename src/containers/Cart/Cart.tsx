@@ -1,5 +1,5 @@
 import * as React from "react";
-import { data } from "../../data";
+import { data } from "../../store/reducers/productReducer";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Dispatch } from "redux";
