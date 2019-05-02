@@ -7,7 +7,8 @@ export const INCREASE_CART = "INCREASE_CART";
 export const DECREASE_CART = "DECREASE_CART";
 export const REMOVE_CART = "REMOVE_CART";
 export const CLEAR_CART = "CLEAR CART";
-import { data, phones } from "../data";
+import { data } from "./reducers/productReducer";
+import database from "../firebase";
 
 type FetchData = { type: typeof FETCH_DATA; payload: data[] };
 type AddToCart = { type: typeof ADD_TO_CART; payload: number };
@@ -19,10 +20,25 @@ type DecreaseCart = { type: typeof DECREASE_CART; payload: number };
 type RemoveCart = { type: typeof REMOVE_CART; payload: number };
 type ClearCart = { type: typeof CLEAR_CART };
 
-export const fetchData = (): FetchData => {
+export const fetchData = (phones: data[]): FetchData => {
   console.log("FETCH DATA");
   return { type: FETCH_DATA, payload: phones };
 };
+
+export function fetchDataThunk() {
+  return dispatch => {
+    const phones: data[] = [];
+    database
+      .ref("/phones")
+      .once("value", snap => {
+        snap.forEach(data => {
+          let phone = data.val();
+          phones.push(phone);
+        });
+      })
+      .then(() => dispatch(fetchData(phones)));
+  };
+}
 
 export const addToCart = (id: number): AddToCart => {
   console.log("ADD TO CART", id);
