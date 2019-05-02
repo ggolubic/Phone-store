@@ -10,7 +10,18 @@ import {
   REMOVE_CART,
   CLEAR_CART
 } from "../actions";
-import { data, productDetails } from "../../data";
+
+export interface data {
+  id: number;
+  title: string;
+  img: any;
+  price: number;
+  company: string;
+  info: string;
+  inCart: boolean;
+  count: number;
+  total: number;
+}
 
 const initialState = {
   phones: [],
@@ -18,7 +29,7 @@ const initialState = {
   error: "",
   cart: [],
   modalOpen: false,
-  modalDetails: productDetails,
+  modalDetails: {},
   cartSubtotal: 0,
   cartTax: 0,
   cartTotal: 0
@@ -30,7 +41,7 @@ interface state {
   error: string;
   cart: data[];
   modalOpen: boolean;
-  modalDetails: data;
+  modalDetails: data | object;
   cartSubtotal: number;
   cartTax: number;
   cartTotal: number;
