@@ -3,7 +3,7 @@ import "./App.css";
 
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { fetchData } from "./store/actions";
+import { fetchDataThunk } from "./store/actions";
 
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -36,7 +36,7 @@ class App extends React.Component<Props, {}> {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    handleFetchData: (): any => dispatch<any>(fetchData())
+    handleFetchData: (): any => dispatch<any>(fetchDataThunk())
   };
 };
 
