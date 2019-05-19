@@ -1,6 +1,7 @@
 .product-list {
   width: 1200px;
   display: grid;
+  height: 60vh;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 5%;
   margin: 0 auto;
@@ -11,6 +12,22 @@
   font-family: "Lato";
   text-align: center;
   margin-top: 50px;
+}
+
+.productFade-enter {
+  opacity: 0;
+}
+.productFade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+.productFade-exit {
+  opacity: 1;
+}
+.productFade-exit-active {
+  opacity: 0;
+
+  transition: opacity 300ms linear;
 }
 
 @media screen and (max-width: 1250px) {
@@ -30,6 +47,6 @@
 @media screen and (max-width: 550px) {
   .product-list {
     display: block;
-    margin: 0 auto;
+    width: 90%;
   }
 }

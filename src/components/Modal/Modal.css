@@ -26,9 +26,7 @@
   font-size: 20px;
   cursor: pointer;
 }
-.modal-img {
-  width: 85%;
-}
+
 .btn-cart,
 .btn-back {
   border: 1px solid #888;
@@ -42,4 +40,9 @@
 .btn-cart:hover,
 .btn-back:hover {
   background: rgb(192, 186, 186);
+}
+@media screen and (max-width: 768px) {
+  .modal-container {
+    width: 80%;
+  }
 }

@@ -115,5 +115,29 @@
 }
 .checkout-container {
   margin-left: auto;
-  width: 200px;
+  width: 170px;
+}
+
+@media screen and (max-width: 425px) {
+  .cart-info {
+    display: none;
+  }
+  .cart-item {
+    display: block;
+    width: 90%;
+    margin: 20px auto;
+  }
+  .cart-item span {
+    margin: 10px auto;
+  }
+  .cart-selected-item {
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+  .cart-change {
+    margin: 10px auto;
+  }
+  .checkout-container {
+    margin: 0 auto;
+  }
 }

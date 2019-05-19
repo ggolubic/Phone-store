@@ -14,3 +14,17 @@
   font-family: "Roboto";
   text-align: justify;
 }
+@media screen and (max-width: 425px) {
+  .grid-container {
+    display: block;
+  }
+  .details-title {
+    font-size: 1.5rem;
+  }
+  .left-col {
+    text-align: center;
+  }
+  .btn {
+    margin: 10px auto;
+  }
+}
