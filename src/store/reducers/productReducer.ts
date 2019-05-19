@@ -1,6 +1,8 @@
 import {
   Actions,
-  FETCH_DATA,
+  FETCH_DATA_BEGIN,
+  FETCH_DATA_SUCCESS,
+  FETCH_DATA_FAILURE,
   ADD_TO_CART,
   ADD_TO_DETAILS,
   OPEN_MODAL,
@@ -32,7 +34,8 @@ const initialState = {
   modalDetails: {},
   cartSubtotal: 0,
   cartTax: 0,
-  cartTotal: 0
+  cartTotal: 0,
+  loading: false
 };
 
 interface state {
@@ -45,15 +48,28 @@ interface state {
   cartSubtotal: number;
   cartTax: number;
   cartTotal: number;
+  loading: boolean;
 }
 
 export default function reducer(state: state = initialState, action: Actions) {
   console.log(state, action);
   switch (action.type) {
-    case FETCH_DATA:
+    case FETCH_DATA_BEGIN:
       return {
         ...state,
-        phones: action.payload
+        loading: true
+      };
+    case FETCH_DATA_SUCCESS:
+      return {
+        ...state,
+        phones: action.payload,
+        loading: false
+      };
+    case FETCH_DATA_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false
       };
     case ADD_TO_CART:
       let tempProducts = [...state.phones];

@@ -1,4 +1,6 @@
-export const FETCH_DATA = "FETCH_DATA";
+export const FETCH_DATA_BEGIN = "FETCH_DATA_BEGIN";
+export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
+export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const ADD_TO_DETAILS = "ADD_TO_DETAILS";
 export const OPEN_MODAL = "OPEN_MODAL";
@@ -10,7 +12,9 @@ export const CLEAR_CART = "CLEAR CART";
 import { data } from "./reducers/productReducer";
 import database from "../firebase";
 
-type FetchData = { type: typeof FETCH_DATA; payload: data[] };
+type FetchDataBegin = { type: typeof FETCH_DATA_BEGIN };
+type FetchDataSuccess = { type: typeof FETCH_DATA_SUCCESS; payload: data[] };
+type FetchDataFailure = { type: typeof FETCH_DATA_FAILURE; payload: string };
 type AddToCart = { type: typeof ADD_TO_CART; payload: number };
 type AddToDetails = { type: typeof ADD_TO_DETAILS; payload: data };
 type OpenModal = { type: typeof OPEN_MODAL; payload: number };
@@ -20,15 +24,11 @@ type DecreaseCart = { type: typeof DECREASE_CART; payload: number };
 type RemoveCart = { type: typeof REMOVE_CART; payload: number };
 type ClearCart = { type: typeof CLEAR_CART };
 
-export const fetchData = (phones: data[]): FetchData => {
-  console.log("FETCH DATA");
-  return { type: FETCH_DATA, payload: phones };
-};
-
 export function fetchDataThunk() {
   return dispatch => {
+    dispatch(fetchDataBegin());
     const phones: data[] = [];
-    database
+    return database
       .ref("/phones")
       .once("value", snap => {
         snap.forEach(data => {
@@ -36,9 +36,26 @@ export function fetchDataThunk() {
           phones.push(phone);
         });
       })
-      .then(() => dispatch(fetchData(phones)));
+      .then(() => {
+        dispatch(fetchDataSuccess(phones));
+      })
+      .catch(error => dispatch(fetchDataFailure(error)));
   };
 }
+export const fetchDataBegin = (): FetchDataBegin => {
+  console.log("FETCH DATA");
+  return { type: FETCH_DATA_BEGIN };
+};
+
+export const fetchDataSuccess = (phones: data[]): FetchDataSuccess => {
+  console.log("FETCH DATA SUCCESS");
+  return { type: FETCH_DATA_SUCCESS, payload: phones };
+};
+
+export const fetchDataFailure = (error): FetchDataFailure => {
+  console.log("FETCH DATA FAILURE");
+  return { type: FETCH_DATA_FAILURE, payload: error };
+};
 
 export const addToCart = (id: number): AddToCart => {
   console.log("ADD TO CART", id);
@@ -47,7 +64,6 @@ export const addToCart = (id: number): AddToCart => {
     payload: id
   };
 };
-
 export const addToDetails = (product: data): AddToDetails => {
   console.log("ADD TO DETAILS", product);
   return {
@@ -100,7 +116,9 @@ export const clearCart = (): ClearCart => {
 };
 
 export type Actions =
-  | FetchData
+  | FetchDataBegin
+  | FetchDataSuccess
+  | FetchDataFailure
   | AddToCart
   | AddToDetails
   | OpenModal
