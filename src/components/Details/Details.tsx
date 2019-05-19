@@ -13,7 +13,7 @@ interface Props {
   openModal: (id: number) => void;
 }
 
-class Details extends React.Component<Props, {}> {
+export class Details extends React.Component<Props, {}> {
   render() {
     const {
       title,

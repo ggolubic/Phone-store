@@ -13,7 +13,7 @@ import {
   decreaseCart,
   removeCart,
   clearCart
-} from "src/store/actions";
+} from "../../store/actions";
 import { History } from "history";
 
 interface RouterProps {
@@ -37,7 +37,7 @@ interface StateProps {
 
 type Props = DispatchProps & StateProps & RouterProps;
 
-class Cart extends React.Component<Props, {}> {
+export class Cart extends React.Component<Props, {}> {
   render() {
     const {
       items,
@@ -88,7 +88,7 @@ class Cart extends React.Component<Props, {}> {
                 </div>
               </Link>
 
-              <span>{`$${item.price}`}</span>
+              <span className="cart-item-price">{`$${item.price}`}</span>
               <div className="cart-change">
                 <i
                   className={
@@ -110,7 +110,7 @@ class Cart extends React.Component<Props, {}> {
                 />
               </div>
               <i className="fas fa-trash-alt" onClick={() => remove(item.id)} />
-              <span>{`$${item.total}`}</span>
+              <span className="cart-item-total">{`$${item.total}`}</span>
             </div>
           );
         })}
