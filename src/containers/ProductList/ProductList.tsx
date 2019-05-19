@@ -1,14 +1,16 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
+
 import { addToCart, addToDetails, openModal } from "../../store/actions";
 import { data } from "../../store/reducers/productReducer";
-
 import ProductListing from "../../components/ProductListing/ProductListing";
 import "./ProductList.css";
+import Loading from "src/components/Loading/Loading";
 
 interface props {
   data: [data];
+  loading: boolean;
 }
 interface dispatchProps {
   addToCart: (id: number) => void;
@@ -34,15 +36,19 @@ class ProductList extends React.Component<Props, {}> {
       <>
         <h1 className="products">Products</h1>
         <div className="product-list">
-          {this.props.data.map((item: data) => (
-            <ProductListing
-              {...item}
-              key={item.id}
-              toggleCart={this.props.addToCart}
-              handleDetails={this.handleDetails}
-              openModal={this.props.openModal}
-            />
-          ))}
+          {this.props.loading ? (
+            <Loading />
+          ) : (
+            this.props.data.map((item: data) => (
+              <ProductListing
+                {...item}
+                key={item.id}
+                toggleCart={this.props.addToCart}
+                handleDetails={this.handleDetails}
+                openModal={this.props.openModal}
+              />
+            ))
+          )}
         </div>
       </>
     );
@@ -50,7 +56,8 @@ class ProductList extends React.Component<Props, {}> {
 }
 
 const mapStateToProps = (state: any) => ({
-  data: state.phones
+  data: state.phones,
+  loading: state.loading
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

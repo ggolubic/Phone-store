@@ -4,17 +4,19 @@ import { data } from "../../store/reducers/productReducer";
 import { closeModal } from "src/store/actions";
 import { Dispatch } from "redux";
 import { Link } from "react-router-dom";
+
 import "./Modal.css";
 
 interface Props {
   item: data;
+  isOpen: boolean;
   closeModal: () => void;
 }
 
-const Modal = ({ item, closeModal }: Props) => {
-  return (
+const Modal = ({ item, closeModal, isOpen }: Props) => {
+  return isOpen ? (
     <div className="modal-background">
-      <div className="modal-container">
+      <div className="modal-container" tabIndex={0}>
         <i className="fas fa-times close-icon" onClick={closeModal} />
         <h2 className="modal-title">Item Added To The Cart</h2>
         <img src={item.img} alt="product" className="modal-img" />
@@ -34,11 +36,12 @@ const Modal = ({ item, closeModal }: Props) => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 const mapStateToProps = (state: any) => ({
-  item: state.modalDetails
+  item: state.modalDetails,
+  isOpen: state.modalOpen
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
