@@ -1,7 +1,7 @@
 .product-list {
   width: 1200px;
   display: grid;
-  height: 60vh;
+
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 5%;
   margin: 0 auto;
