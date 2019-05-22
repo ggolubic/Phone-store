@@ -10,7 +10,8 @@ import {
   INCREASE_CART,
   DECREASE_CART,
   REMOVE_CART,
-  CLEAR_CART
+  CLEAR_CART,
+  UPDATE_SEARCH
 } from "../actions";
 
 export interface data {
@@ -35,7 +36,9 @@ const initialState = {
   cartSubtotal: 0,
   cartTax: 0,
   cartTotal: 0,
-  loading: false
+  loading: false,
+  searchVal: "",
+  searchedItems: []
 };
 
 interface state {
@@ -49,6 +52,7 @@ interface state {
   cartTax: number;
   cartTotal: number;
   loading: boolean;
+  searchVal: string;
 }
 
 export default function reducer(state: state = initialState, action: Actions) {
@@ -60,9 +64,11 @@ export default function reducer(state: state = initialState, action: Actions) {
         loading: true
       };
     case FETCH_DATA_SUCCESS:
+      const searchedItems = getSearchedItems(action.payload);
       return {
         ...state,
         phones: action.payload,
+        searchedItems: searchedItems,
         loading: false
       };
     case FETCH_DATA_FAILURE:
@@ -184,6 +190,14 @@ export default function reducer(state: state = initialState, action: Actions) {
         ...state,
         cart: tempCart
       };
+    case UPDATE_SEARCH:
+      const phones = [...state.phones];
+      const newPhones = getSearchedItems(phones, action.payload);
+      return {
+        ...state,
+        searchVal: action.payload,
+        searchedItems: newPhones
+      };
     default:
       return {
         ...state
@@ -206,6 +220,13 @@ function getIndexOfItem(state: data[], id: number) {
     return index; //vrati item s tim id-em
   }
   return -1;
+}
+
+function getSearchedItems(state: data[], value: string = "") {
+  const tempPhones = [...state];
+  return tempPhones.filter(phone =>
+    phone.title.toLowerCase().includes(value.toLowerCase())
+  );
 }
 
 //selectors

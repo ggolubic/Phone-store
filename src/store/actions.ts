@@ -8,7 +8,8 @@ export const CLOSE_MODAL = "CLOSE_MODAL";
 export const INCREASE_CART = "INCREASE_CART";
 export const DECREASE_CART = "DECREASE_CART";
 export const REMOVE_CART = "REMOVE_CART";
-export const CLEAR_CART = "CLEAR CART";
+export const CLEAR_CART = "CLEAR_CART";
+export const UPDATE_SEARCH = "UPDATE_SEARCH";
 import { data } from "./reducers/productReducer";
 import database from "../firebase";
 
@@ -23,6 +24,7 @@ type IncreaseCart = { type: typeof INCREASE_CART; payload: number };
 type DecreaseCart = { type: typeof DECREASE_CART; payload: number };
 type RemoveCart = { type: typeof REMOVE_CART; payload: number };
 type ClearCart = { type: typeof CLEAR_CART };
+type UpdateSearch = { type: typeof UPDATE_SEARCH; payload: string };
 
 export function fetchDataThunk() {
   return dispatch => {
@@ -115,6 +117,14 @@ export const clearCart = (): ClearCart => {
   };
 };
 
+export const updateSearch = (value: string): UpdateSearch => {
+  console.log("UPDATE SEARCH");
+  return {
+    type: UPDATE_SEARCH,
+    payload: value
+  };
+};
+
 export type Actions =
   | FetchDataBegin
   | FetchDataSuccess
@@ -126,4 +136,5 @@ export type Actions =
   | IncreaseCart
   | DecreaseCart
   | RemoveCart
-  | ClearCart;
+  | ClearCart
+  | UpdateSearch;

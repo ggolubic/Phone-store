@@ -56,7 +56,7 @@ class ProductList extends React.Component<Props, {}> {
 }
 
 const mapStateToProps = (state: any) => ({
-  data: state.phones,
+  data: state.searchedItems,
   loading: state.loading
 });
 

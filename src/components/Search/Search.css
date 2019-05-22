@@ -1,0 +1,29 @@
+.search {
+  border-radius: 5em;
+  margin: 10px 0px 10px 0px;
+  padding: 9px 10px 9px 32px;
+  outline: none;
+  width: 110px;
+  border: solid 1px #ccc;
+  transition: all 0.5s;
+}
+.search-wrapper {
+  position: relative;
+}
+.icon {
+  position: absolute;
+  left: 5%;
+  top: 40%;
+}
+.search:focus {
+  width: 150px;
+  border-color: #66cc75;
+}
+@media screen and (max-width: 325px) {
+  .search {
+    margin-right: 2vw;
+  }
+  .search:focus {
+    width: 130px;
+  }
+}
