@@ -11,7 +11,6 @@
   text-align: center;
 }
 .details-info {
-  font-family: "Roboto";
   text-align: justify;
 }
 @media screen and (max-width: 425px) {
@@ -26,5 +25,8 @@
   }
   .btn {
     margin: 10px auto;
+  }
+  .right-col {
+    margin: 0px 15px;
   }
 }

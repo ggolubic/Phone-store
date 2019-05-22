@@ -33,10 +33,10 @@ export class Details extends React.Component<Props, {}> {
           </div>
           <div className="right-col">
             <p>
-              Price: <span>{`${price}$`}</span>
+              <strong>Price:</strong> <span>{`${price}$`}</span>
             </p>
             <p>
-              Made by: <span>{company}</span>
+              <strong>Made by:</strong> <span>{company}</span>
             </p>
             <p className="details-info">{info}</p>
             <button
